@@ -64,13 +64,11 @@ export default {
       } catch (error) {
         this.errorMessage = error;
       }
-      console.log(this.results);
 
       let plotData = [];
       for (let i = 0; i < this.results.length; i++) {
         plotData.push({ x: this.results[i].date, y: this.results[i].temp });
       }
-      console.log(plotData);
       const ctx = document.getElementById("myChart");
       const myChart = new Chart(ctx, {
         type: "bar",
