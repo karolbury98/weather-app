@@ -8,27 +8,26 @@
     </div>
     <div class="row">
       <div class="col">
-        <div class="col">
-        <canvas id="myChart" width="300" height="300"></canvas>
+        <canvas id="myChart" width="300" height="150"></canvas>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Humidity</th>
+              <th scope="col">Temperature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(result, index) in results" :key="index">
+              <td>{{ result.date }}</td>
+              <td>{{ result.humidity }}</td>
+              <td>{{ result.temp }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Humidity</th>
-            <th scope="col">Temperature</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(result, index) in results" :key="index">
-            <td>{{ result.date }}</td>
-            <td>{{ result.humidity }}</td>
-            <td>{{ result.temp }}</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-  </div>
   </div>
 </template>
 
@@ -56,9 +55,7 @@ export default {
       this.errorMessage = error;
     }
   },
-  mounted() {
- 
-  },
+  mounted() {},
   methods: {
     async getResultsByCityId(cityId) {
       try {
@@ -70,50 +67,49 @@ export default {
       console.log(this.results);
 
       let plotData = [];
-      for (let i=0; i<this.results.length; i++) {
-        plotData.push({'x': this.results[i].date, 'y': this.results[i].temp})
+      for (let i = 0; i < this.results.length; i++) {
+        plotData.push({ x: this.results[i].date, y: this.results[i].temp });
       }
       console.log(plotData);
       const ctx = document.getElementById("myChart");
-    const myChart = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: plotData.x,
-        datasets: [
-          {
-            label: "Temperature",
-            data: plotData,
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-            ],
-            borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
+      const myChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: plotData.x,
+          datasets: [
+            {
+              label: "Temperature",
+              data: plotData,
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
           },
         },
-      },
-    });
-    myChart;
+      });
+      myChart;
     },
-
   },
 };
 </script>

@@ -13,10 +13,6 @@ export class ResultService {
     return axios.post(url, result);
   }
 
-  //   static getResultsByCityId(cityId) {
-  //     let url = `${this.serverUrl}/results`;
-  //     return axios.get(url, {params: cityId});
-  // }
   static getResultsByCityId(cityId) {
     let url = `${this.serverUrl}/results?cityId=${cityId}`;
     return axios.get(url);

@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <!-- <div v-for="data in myJson.slice(0,10)" :key="data.id">{{data.name}}</div> -->
     <div class="row">
       <div class="col-lg-4 col-md-12">
         <form @submit.prevent="addCity()">
@@ -16,8 +15,7 @@
       </div>
     </div>
 
-    <div class="row">
-      <!-- <div class="col-lg-4 col-md-6 col-12"> -->
+    <div class="row d-flex justify-content-center">
       <div
         class="card col-lg-4 col-md-6 col-12"
         v-for="city in cities"
@@ -30,7 +28,6 @@
 </template>
 
 <script>
-// import CityCardModal from "./CityCardModal.vue";
 import { CityService } from "@/services/CityService";
 import { ResultService } from "@/services/ResultService";
 import axios from "axios";
@@ -40,10 +37,6 @@ import json from "../json/city.list.json";
 // https://api.openweathermap.org/data/2.5/weather?id=759734&units=metric&appid=55e5032c4098f9c1de2776417bfcf1c3
 export default {
   name: "HomePage",
-  components: {
-    // CityCardModal,
-  },
-  //props: {result},
   data() {
     return {
       cities: [],
@@ -97,12 +90,12 @@ export default {
             console.log("city added id " + result[0].id); //some cities have few records on the same city so I get only first id
             this.inputValue = "";
 
-            // try {
-            //   let res = await CityService.getAllCities();
-            //   this.cities = res.data;
-            // } catch (error) {
-            //   this.errorMessage = error;
-            // }
+            try {
+              let res = await CityService.getAllCities();
+              this.cities = res.data;
+            } catch (error) {
+              this.errorMessage = error;
+            }
           }
         } else {
           console.log("we do not have this city on the list");
@@ -140,14 +133,6 @@ export default {
         } else {
           console.log("getCurrentWeatherForAllCitiesFromList problem");
         }
-        // axios
-        //   .post("http://localhost:3001/results/", this.results[i])
-        //   .then((res) => {
-        //     console.log(res.data);
-        //   })
-        //   .catch((err) => {
-        //     console.log(err);
-        //   });
       }
 
       this.results = [];
@@ -166,9 +151,9 @@ export default {
   background: -webkit-linear-gradient(
     90deg,
     hsla(217, 100%, 50%, 1) 0%,
-    hsla(186, 100%, 69%, 1) 100%
+    rgb(57, 200, 216) 100%
   );
-  border: 1px grey;
+  border: 1px black;
   border-radius: 15%;
   font-size: 25px;
   text-align: center;
@@ -178,9 +163,6 @@ export default {
   display: flex;
 }
 
-.card-add {
-  background-color: #2dad49;
-}
 button {
   margin: auto;
 }
@@ -188,5 +170,9 @@ button {
 a {
   text-decoration: none;
   color: black;
+}
+
+input {
+  background-color: #afe4ed;
 }
 </style>

@@ -1,17 +1,13 @@
 <template>
-  <!-- <HomePage /> -->
   <router-view />
 </template>
 
 <script>
-//import HomePage from './components/HomePage.vue'
 
 export default {
-  name: 'App',
-  // components: {
-  //   HomePage
-  // }
-}
+  name: "App",
+
+};
 </script>
 
 <style>
@@ -22,5 +18,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-color: #afe4ed;
+}
+html {
+  background-color: #afe4ed;
 }
 </style>
